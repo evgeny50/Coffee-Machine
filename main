@@ -1,0 +1,137 @@
+water = 400
+milk = 540
+coffe_beans = 120
+cups = 9
+money = 550
+def machine_has():
+    print('The coffee machine has:')
+    print(f'{water} of water')
+    print(f'{milk} of milk')
+    print(f'{coffe_beans} of coffee beans')
+    print(f'{cups} of disposable cups')
+    print(f'${money} of money')
+
+
+def buy():
+    print()
+    print('What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:')
+    a = input()
+    if a == 'back':
+        main()
+    elif int(a) == 1:
+        espresso()
+    elif int(a) == 2:
+        latte()
+    else:
+        cappuccino()
+
+
+def remaining():
+    machine_has()
+    print()
+    main()
+
+
+def fill():
+    print()
+    global water
+    global money
+    global milk
+    global coffe_beans
+    global cups
+    water += int(input('Write how many ml of water do you want to add:'))
+    milk += int(input('Write how many ml of milk do you want to add:'))
+    coffe_beans += int(input('Write how many grams of coffee beans do you want to add:'))
+    cups += int(input('Write how many disposable cups of coffee do you want to add:'))
+    print()
+    main()
+
+
+def take():
+    global water
+    global money
+    global milk
+    global coffe_beans
+    global cups
+    print()
+    print(f'I gave you ${money}')
+    money -= money
+    print()
+    main()
+
+
+def action():
+    print('Write action (buy, fill, take, remaining, exit):')
+    global act
+    act = input()
+
+
+def espresso():
+    global water
+    global money
+    global milk
+    global coffe_beans
+    global cups
+    if min (water // 250, coffe_beans // 16, cups // 1) >= 1:
+        water -= 250
+        milk -= 0
+        coffe_beans -= 16
+        cups -= 1
+        money += 4
+        print('I have enough resources, making you a coffee!')
+    else:
+        print('Sorry, not enough water!')
+    main()
+
+
+def latte():
+    global water
+    global money
+    global milk
+    global coffe_beans
+    global cups
+    if min (water // 350, milk // 75, coffe_beans // 20, cups // 1) >= 1:
+        water -= 350
+        milk -= 75
+        coffe_beans -= 20
+        cups -= 1
+        money += 7
+        print('I have enough resources, making you a coffee!')
+    else:
+        print('Sorry, not enough water!')
+    main()
+
+
+def cappuccino():
+    global water
+    global money
+    global milk
+    global coffe_beans
+    global cups
+    if min(water // 200, milk // 100, coffe_beans // 12, cups // 1) >= 1:
+        water -= 200
+        milk -= 100
+        coffe_beans -= 12
+        cups -= 1
+        money += 6
+        print('I have enough resources, making you a coffee!')
+    else:
+        print('Sorry, not enough water!')
+    main()
+
+
+def main():
+    action()
+    if act == 'buy':
+        buy()
+    elif act == 'fill':
+        fill()
+    elif act == 'remaining':
+        remaining()
+    elif act == 'exit':
+        pass
+    else:
+        take()
+
+main()
+
